@@ -4,11 +4,10 @@
   "description": "[![Build Status](https://travis-ci.com/khuynh92/18-oauth.svg?branch=master)](https://travis-ci.com/khuynh92/18-oauth)",
   "main": "index.js",
   "scripts": {
-    "db": "mongod --dbpath=/Users/john/codefellows/tmp/db",
     "start": "node index.js",
     "watch": "nodemon index.js",
     "test-watch": "jest --watchAll",
-    "test": "jest",
+    "test": "jest --forceExit",
     "lint": "eslint **/*.js"
   },
   "repository": {

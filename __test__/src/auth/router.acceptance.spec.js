@@ -21,7 +21,7 @@ jest.setTimeout(30000);
 beforeAll((done) => {
   mockgoose.prepareStorage().then(function () {
     console.log('preparing mockgoose');
-    mongoose.connect('mongodb://localhost/lab_16').then(() => done());
+    mongoose.connect('mongodb://localhost/lab_18').then(() => done());
   });
 });
 

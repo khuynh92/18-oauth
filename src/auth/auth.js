@@ -1,7 +1,6 @@
 'use strict';
 
 import User from './users.js';
-
 export default (req, res, next) => {
   
   let authenticate = (userObj) => {
@@ -37,6 +36,10 @@ export default (req, res, next) => {
   };
 
   try {
+    if(req.cookies.auth) {
+      return authorize(req.cookies.auth);
+    }
+    
     let userObj = {};
     let authHeader = req.headers.authorization;
     if(!authHeader) {

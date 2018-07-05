@@ -19,6 +19,28 @@ userSchema.pre('save', function(next) {
     .catch(err => { throw err; });
 });
 
+userSchema.statics.createFromOAuth = function(googleUser) {
+  if(!googleUser || !googleUser.email) {
+    return Promise.reject('VALIDATION ERROR: missing username/email or password');
+  }
+
+  return this.findOne({email:googleUser.email})
+    .then(user => {
+      if(!user) { throw new Error ('User Not Found'); }
+      console.log('Welcome Back!', user.username);
+      return user;
+    })
+    .catch((error) => {
+      console.log(error);
+      let username = googleUser.email;
+      let password = 'fakepasswordbutnotreallysinceitisapasswordbutitwillbelongsonoonewillbreakintoit';
+      return this.create({
+        username: username,
+        password: password,
+        email: googleUser.email,
+      });
+    } );
+};
 
 userSchema.statics.authenticate = function(userObj) {
   return this.findOne({username: userObj.username})

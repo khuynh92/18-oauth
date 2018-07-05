@@ -7,6 +7,8 @@
 
 <body>
   <main>
+    <div id="oauth"></div>
+
     <h2>CREATE ACCOUNT</h2>
     <form action="http://localhost:3000/signup" method="POST">
       <label>
@@ -27,6 +29,25 @@
       <input type="submit" value="Create User" />
     </form>
   </main>
+  <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script>
+    let googleURL = "https://accounts.google.com/o/oauth2/v2/auth"
+    let options = {
+      client_id: '123538572340-or8e9drlqqnlmkfupkcfh519d889dqo6.apps.googleusercontent.com',
+      redirect_uri: 'http://localhost:3000/oauth/google/code',
+      scope: 'email openid profile',
+      prompt: 'consent',
+      response_type: 'code'
+    }
+
+    let queryString = Object.keys(options).map(key => {
+      return `${key}=` + encodeURIComponent(options[key])
+    }).join('&');
+
+    let authURL = `${googleURL}?${queryString}`
+
+    $('#oauth').append(`<a href="${authURL}">Login With Google</a>`)
+  </script>
 </body>
 
 </html>

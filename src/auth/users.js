@@ -19,12 +19,12 @@ userSchema.pre('save', function(next) {
     .catch(err => { throw err; });
 });
 
-userSchema.statics.createFromOAuth = function(googleUser) {
-  if(!googleUser || !googleUser.email) {
+userSchema.statics.createFromOAuth = function(linkedInUser) {
+  if(!linkedInUser || !linkedInUser.email) {
     return Promise.reject('VALIDATION ERROR: missing username/email or password');
   }
 
-  return this.findOne({email:googleUser.email})
+  return this.findOne({email:linkedInUser.email})
     .then(user => {
       if(!user) { throw new Error ('User Not Found'); }
       console.log('Welcome Back!', user.username);
@@ -32,12 +32,12 @@ userSchema.statics.createFromOAuth = function(googleUser) {
     })
     .catch((error) => {
       console.log(error);
-      let username = googleUser.email;
+      let username = linkedInUser.email;
       let password = 'fakepasswordbutnotreallysinceitisapasswordbutitwillbelongsonoonewillbreakintoit';
       return this.create({
         username: username,
         password: password,
-        email: googleUser.email,
+        email: linkedInUser.email,
       });
     } );
 };

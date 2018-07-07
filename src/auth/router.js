@@ -25,19 +25,20 @@ authRouter.get('/signin', auth, (req, res) => {
   res.send(req.token);
 });
 
-authRouter.get('/oauth/google/code', (req,res,next) => {
+authRouter.get('/oauth', (req,res,next) => {
   oauth.authorize(req)
     .then(token => {
       res.cookie('auth', token);
-      res.redirect(`${process.env.CLIENT_URL}?token=${token}`);
+      res.redirect(`${process.env.CLIENT_URL}`);
     })
     .catch(next);
 });
 
-authRouter.get('/open', auth, (req,res) => {
-  console.log(req.query.token);
-  
-  res.send('Sesame');
+authRouter.get('/profile', auth, (req,res) => {
+  User.findOne(req.id)
+    .then(data => {
+      res.send(data);
+    });
 });
 
 export default authRouter;

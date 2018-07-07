@@ -2,37 +2,20 @@
 
 Travis: https://travis-ci.com/khuynh92/18-oauth  
 Heroku: https://khoa-18-oauth.herokuapp.com  
-PR: https://github.com/khuynh92/18-oauth/pull/1  
+PR: https://github.com/khuynh92/18-oauth/pull/2  
 
 ## 18-oauth
 
+## testing routes
 
-in order to run this app:
+### OAuth Sign in/up
+on the home page `https://khoa-18-oauth.herokuapp.com` click on the anchor tag 'sign in with linkedIn' to test linkedIn OAuth.
+Response Will be your user object that was created through linkedIn OAuth *note password hash shown IS NOT your linkedIN password hash*
 
- 1. clone this repository
+### /signup
+on the home page, use the form to create an account. The user will be redirected to a page with a JWT
 
-
- 2. in your root folder, create a .env file and set PORT, MONGODB_URI, and APP_SECRET values.  example: 
-
- ```
- PORT = 3000
- MONGODB_URI = 'mongodb://localhost/lab_18'
- APP_SECRET = 'sssshhhhhhhhh'
-
- ``` 
-
- 3. First start up your mongo server, and then in your terminal, locate where you cloned this repository, and then type the command: `npm start`. This will begin the server.
-
- 4. in your broswer go to  
-`http://localhost:<YOURPORTHERE>`  
-
- 5. Here, you can input fields to test the POST request. The post request will direct you to `http://localhost:<YOURPORTHERE>/post` and show the generated JSON Web Token (jwt) from the post
-
- 6. To test signup(post), use your choice of tools that makes requests to servers (httpie, postman). Without a header that has Basic Authorization, a 401 will be sent. if There is a header object with a Basic Authorizatoin Key, a status code of 200 will be returned with the jwt.
-
- 7. to test the signin(get), ensure that you are signing in using a basic authentication created using the id and password from an existing user
-
-
-
+### /signin
+To test signin, Use the JWT that was given when signing up on the home page. Use that JWT as a bearer token in postman or httpie.
 
 **This lab was built off of codefellows 18-oauth demo code**
